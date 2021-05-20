@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        for (let i=0;i<5;i++){
+        console.log(i);
+        }
+        //console.log("我在循环外"+i);
+        function fun1(a,b=1)
+        {
+            //b=b||1;
+            console.log(a/b);
+        }
+        // lamda表达式
+        let fun2=(i,j)=>{
+            const z=i+j;
+            console.log(z)
+        }
+        const person=
+        {
+            name:"zhangsan",
+            eat1:function(food)
+            {
+                console.log(this.name+"吃了"+food);
+            },
+            eat2:food=>console.log(person.name+"吃了"+food),
+            eat3(food)
+            {
+                console.log(this.name+"吃了"+food);
+            }
+        }
+        person.eat1("鸡蛋")
+        person.eat2("面条")
+        person.eat3("香蕉")
+        //箭头函数配合函数表达式
+        const p=
+        {
+            name:"lisi",
+            age:30           
+        }
+        const fun3=({name,age})=>{console.log(name,age)};
+        //map函数
+        let arr=['1','20','-5','3'];
+        console.log(arr)
+        arr=arr.map(s=>parseInt(s))
+        console.log(arr)
+        //reduce函数
+        console.log("arr.reduce="+arr.reduce((a,b)=>a+b))
+        console.log("arr.reduce="+arr.reduce((a,b)=>a+b,100))
+        fun3(p);
+        fun1(10);
+        fun2(100,10)
+    </script>
+</body>
+</html>
