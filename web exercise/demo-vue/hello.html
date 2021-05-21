@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- vue对象的html模板 -->
+<div id="app">
+    <input type="checkbox" value="ios" v-model="language">ios<br>
+    <input type="checkbox" value="java" v-model="language">java<br>
+    <input type="checkbox" value="php" v-model="language">php<br>
+    你选择了:{{language.join(",")}}
+    <hr>
+    <!-- 花括号：可以是js表达式 -->
+    <!-- 双向绑定时间 v-model 数据模型 -->
+    <input type="text" v-model="num">
+    <!-- v-on:事件民=js表达式或者方法  -->
+    <input type="button" value="点我呀" v-on:click="num++">
+    <input type="button" value="点我呀2" v-on:click="dncr">
+    <!-- 当网速不好的时候会直接显示{{}},使用v-text来赋值可以避免该情况  v-html可以让值的标签也完成html渲染-->
+    <h1>大家好,我是<span v-text="name">姓名</span>，有{{num}}位<span v-html="meizi"></span>迷恋我,和是{{sum()}}</h1>
+    <!-- {{}}插值表达式 支持js -->
+</div>
+</body>
+<script src="node_modules\vue\dist\vue.js"></script>
+<script>
+    // 初始化一个Vue实例
+    const app=new Vue({
+        el:"#app",
+        // element选择器
+        data:{
+            name:"刘德华",
+            num:100,
+            meizi:"<span style='color:pink'>妹子</span>",
+            language:[]
+        },
+        methods:{
+            dncr(){
+                this.num--;
+            },
+            sum(){
+                return 10000+this.num;
+            }
+        },
+        created()
+        {
+            //举例比如ajax异步请求到num=10000
+            this.num=10000
+        }
+    })
+
+</script>
+</html>
+<!-- node_modules\vue\dist\vue.js -->
