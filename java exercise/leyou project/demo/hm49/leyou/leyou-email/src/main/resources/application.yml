@@ -1,0 +1,15 @@
+server:
+  port: 8086
+spring:
+  application:
+    name: sms-service
+  rabbitmq:
+    host: 192.168.88.15
+    username: leyou
+    password: leyou
+    virtual-host: /leyou
+leyou:
+  sms:
+    sendEmail: 3270232490@qq.com # 你自己的accessKeyId
+    authKey: wfjrauibwsetchje # 你自己的AccessKeySecret
+    signName: 乐优商城 # 签名名称
