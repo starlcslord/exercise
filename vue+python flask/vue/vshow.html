@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>v-show</title>
+	</head>
+	<body>
+		<div id="app">
+			<image src="img/1.jpg" v-show="isShow"></image>
+			<button  @click="changeShow()">切换</button>
+			<image src="img/1.jpg" v-show="age>=18"></image>
+			{{age}}
+			<input v-model="age"/>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+		<script>
+		var app=new Vue({
+			el:"#app",
+			data:{
+				isShow:true,
+				age:0
+			},
+			methods:{
+				changeShow:function(){
+					this.isShow=!this.isShow;
+				}
+			}
+		})
+		</script>
+	</body>
+</html>

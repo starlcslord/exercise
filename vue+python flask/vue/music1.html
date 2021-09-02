@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+	</head>
+	<body>
+		<!-- div挂载点 -->
+		<div id="app">
+			<input type="button" value="get请求" class="get" @click="get" />
+			<input v-model="searchKey" />
+			<input type="button" value="Post请求" class="get" @click="post" />
+			<ul v-for="items in res">
+				<li v-for="item in items" >
+					<!-- title的用法是当鼠标悬停上的时候显示title名称 -->
+					
+				 {{item.name}}
+				 <br>
+				 {{item.artist}}
+				 <br>
+				 <audio :src="item.url" controls="autoplay"></audio>
+				</li>
+			</ul>
+		<br>
+
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+		<script src="https://cdn.bootcss.com/qs/6.5.1/qs.min.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script>
+		var app= new Vue({
+			el:"#app",
+			data:{
+				searchKey:"",
+				res:null
+			},
+			methods:{
+				get:function(){
+					axios.get("http://127.0.0.1:5000/todo/api/v1.0/tasks").then
+					(function(response){
+						app.res=JSON.parse(JSON.stringify(response.data))
+						console.log(response.data);
+					})
+				},
+				post:function(){
+					axios.post("http://127.0.0.1:5000/add/student/",Qs.parse(app.searchKey)).then(function(response){
+						app.res=JSON.parse(JSON.stringify(response.data))
+						console.log(response.data)
+					})
+				}	
+			}
+		})
+		// document.querySelector(".get").onclick=function(){
+		// 	axios.get("http://127.0.0.1:5000/todo/api/v1.0/tasks")
+		// 	.then(function(response){
+		// 		console.log(response.data)
+		// 	})
+		// }
+		//Vue
+		</script>
+	</body>
+</html>

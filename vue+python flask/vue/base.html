@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue基础</title>
+</head>
+<body>
+    <div id="app" class="app">
+        {{message}}
+		{{school}}
+		{{school.name}}
+		{{school.tel}}
+		<ul v-for=" c in campus"> <!--v-for用法 -->
+			<li>{{c}}</li>
+		</ul>
+		<h2 v-text="coder">啊啊啊</h2> <!-- v-text会把内容覆盖-->
+		<h2>前端{{coder+"!"}}</h2> <!-- 插值表达式 -->
+		<h2 v-html="content"></h2> <!--可以在v-html里面放入超文本标记语言-->
+		<input type="button" value="v-on指令" v-on:click="doIt"/>
+		<input type="button" value="v-on简写" @click="doIt" />
+		<input type="button" value="双击事件" @dblclick="doIt()" />
+		<h2 @click="changeFood()">{{food}}</h2>
+	</div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>   
+    <script>
+        var app = new Vue({
+            el:"#app",//一般使用id选择器
+			// el:".app",  类选择器
+			//el:"div",    标签选择器
+			//Vue无法挂载上body 和 html
+			//css选择器，Vue都可以使用
+            data:{
+                message:"Hello Vue! ",
+				food:"西兰花炒蛋",
+				school:{
+					name:"hmcoder",
+					tel:"110"
+				},
+				campus:["北京校区","上海校区"],
+				coder:"黑马程序员",
+				content:"<a href='#'>黑马程序员</a>",
+            },
+			methods:{
+				doIt:function(){
+					alert("执行成功");
+				},
+				changeFood:function(){
+					console.log(this.food);
+					this.food+="好吃";
+				}
+			},
+        })
+    </script>
+</body>
+</html>

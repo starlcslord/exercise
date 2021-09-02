@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+		.active{
+			border: 2px solid red;
+		}
+		</style>
+	</head>
+	<body>
+		<!-- div挂载点 -->
+		<div id="app">
+			<!-- v-bind 指令为元素绑定属性，但是无法实现双向绑定 -->
+			<img v-bind:src="imgSrc" :title="imgTitle" :class="isActive?'active':''" @click="toggleActive()"/>
+			<img v-bind:src="imgSrc" :title="imgTitle" :class="{active:isActive}" @click="toggleActive()"/>
+			<!--  :class="isActive?'active':''"  和 :class="{active:isActive}"都是一样的 但是第二个更为简单一点  第二个active是否生效取决与isActive-->
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+		<script>
+		//Vue
+		var app=new Vue({
+			el:"#app",
+			data:{
+				imgSrc:"img/1.jpg",
+				imgTitle:"嘿嘿",
+				isActive:false
+			},
+			methods:{
+				toggleActive:function(){
+					this.isActive=!this.isActive
+				}
+			}
+		})
+		</script>
+	</body>
+</html>

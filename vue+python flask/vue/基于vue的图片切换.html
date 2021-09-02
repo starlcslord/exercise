@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+		#jiantou{
+			height: 50px;
+			width: 70px;
+		}
+		</style>
+	</head>
+	<body>
+		<!-- div挂载点 -->
+		<div id="app">
+			<img id="jiantou" @click="prev()" src="img/left.jpg" v-show="index>0"/>
+			<img :src="imgArr[index]" >
+			<img id="jiantou" @click="next()" src="img/right.jpg" v-show="index<3"/>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+		<script>
+		//Vue
+		var app=new Vue({
+			el:"#app",
+			data:{
+				imgArr:["img/豪侠.jpg","img/宁红夜.jpg","img/妖刀姬.jpg","img/迦南.jpg"],
+				index:0
+			},
+			methods:{
+				prev:function(){
+						this.index--;
+						},
+						next:function(){
+					this.index++;
+				}
+				},
+			
+		})
+		</script>
+	</body>
+</html>

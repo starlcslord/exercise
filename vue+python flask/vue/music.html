@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+	</head>
+	<body>
+		<!-- div挂载点 -->
+		<div id="app">
+			<input type="button" value="get请求" class="get" @click="get" />
+			<input v-model="data.key" />
+			<input type="button" value="Post请求" class="get" @click="post" />
+			<ul v-for="(items,index) in res">
+				<li v-for="(item,index) in items ">
+					<!-- title的用法是当鼠标悬停上的时候显示title名称 --> 
+					<!-- v-show="index<15" --><!-- v-show="index<15" -->
+				<div >
+				 
+				 <div v-if="index==0">
+					 <h2>列表循环</h2> 
+					 <audio :src="item.url" controls @ended="next(items,index)"></audio>
+					 <br />		
+					<br />
+				</div>
+				{{index}}
+				{{item.name}}
+				 <br>
+				 {{item.artist}}
+				 <br> 
+				<audio :src="item.url" controls @ended=""></audio>
+				
+				
+
+				 <!-- <audio class="au" autoplay :src="item.url" controls="controls" refs="audio"> -->
+				 <!-- <audio :src="item.url" controls></audio> -->
+				 </audio>
+				 <!-- @ended="next(items,index)" -->
+				 </div>
+				</li>
+			</ul>
+		<br>
+		<button type="button" @click="add()" style="float: left;">+</button>
+		<h6 style="float: left;">{{data.num}}</h6>
+		<button type="button" @click="sub()" style="float: left;">-</button>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+		<script src="https://cdn.bootcss.com/qs/6.5.1/qs.min.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script>
+		var app= new Vue({
+			el:"#app",
+			data:{
+				searchKey:"",
+				num:1,
+				res:null,
+				data:{
+					key:"",
+					num:1
+				},
+				index:0
+			},
+			methods:{
+				get:function(){
+					axios.get("http://127.0.0.1:5000/todo/api/v1.0/tasks").then
+					(function(response){
+						app.res=JSON.parse(JSON.stringify(response.data))
+						console.log(response.data);
+					})
+				},
+				post:function(){
+					axios.post("http://127.0.0.1:5000/add/student/",app.data).then(function(response){
+						app.res=JSON.parse(JSON.stringify(response.data))
+						console.log(response.data)
+					})
+				},
+				add:function(){
+					if(this.data.num>=10){
+						alert("无法增加了")
+					}else{
+						app.data.num+=1;
+						axios.post("http://127.0.0.1:5000/add/student/",app.data).then(function(response){
+							app.res=JSON.parse(JSON.stringify(response.data))
+							console.log(response.data)
+						})
+						// axios.post("http://127.0.0.1:5000/add/student/",Qs.parse(key=app.data.key,num=app.data.num)).then(function(response){
+						// 	app.res=JSON.parse(JSON.stringify(response.data))
+						// 	console.log(response.data)
+						// })
+					}
+					
+				},
+				sub:function(){
+					if(this.data.num==1){
+						alert("无法再减了")
+					}else{
+					this.data.num=this.data.num-1;
+					axios.post("http://127.0.0.1:5000/add/student/",Qs.stringify(key=app.data.key,num=app.data.num)).then(function(response){
+						app.res=JSON.parse(JSON.stringify(response.data))
+						console.log(response.data)
+					})
+					}
+				},
+				next:function(items){
+					this.index+=1
+					// console.log(items[this.index])
+					// this.$refs.audio=items[this.index].url
+					// this.$refs.audio.play()
+					let audio=new Audio()
+					audio.src=items[this.index].url
+					audio.play()
+				}
+			},
+			mounted() {
+				function nex() {
+					var audios = document.getElementsByTagName("audio");
+						for (var i = 0; i < audios.length; i++) {
+						    // console.log("audios "+i+"  SRC:" + audios[i].currentSrc);
+						    audios[i].addEventListener('ended', function() {
+						        // nextSibling 属性返回指定节点之后紧跟的节点，在相同的树层级中。
+						        var nextAudio = this.nextSibling.nextSibling;
+						        // tagName 属性返回元素的标签名。(大写)
+						        if (nextAudio.tagName == "AUDIO") {
+						            nextAudio.play();
+						        }
+						    }, false);
+						}
+						console.log(audios)
+				}
+				
+			}
+		})
+		// document.querySelector(".get").onclick=function(){
+		// 	axios.get("http://127.0.0.1:5000/todo/api/v1.0/tasks")
+		// 	.then(function(response){
+		// 		console.log(response.data)
+		// 	})
+		// }
+		//Vue
+		</script>
+	</body>
+</html>

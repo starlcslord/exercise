@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>计数器</title>
+	</head>
+	<body>
+		<div id="app">
+			<button type="button" @click="add()">+</button>
+			<h2>{{num}}</h2>
+			<button type="button" @click="sub()">-</button>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+		<script>
+		var app=new Vue({
+			el:"#app",
+			data:{
+				num:1
+			},
+			methods:{
+				add:function(){
+					if(this.num>=10){
+						alert("无法增加了")
+					}else{
+						this.num+=1;
+					}
+					
+				},
+				sub:function(){
+					if(this.num<=0){
+						alert("无法再减了")
+					}else{
+					this.num-=1;
+					}
+				}
+			}
+		})
+		</script>
+	</body>
+</html>

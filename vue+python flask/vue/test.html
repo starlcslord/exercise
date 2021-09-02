@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <audio src="https://mp32.9ku.com/upload/128/2020/10/12/1010079.mp3" controls autoplay=true></audio>
+	<br />
+    <audio src="https://mp32.9ku.com/upload/128/2019/07/27/928430.mp3" controls ></audio>
+	<br />
+    <audio src="https://mp32.9ku.com/upload/128/2019/11/08/998378.mp3" controls></audio>
+	<br />
+    
+   
+ <script >
+    var audios = document.getElementsByTagName("audio");
+    for(var i=0;i<audios.length;i++){
+    	//console.log("audios "+i+"  SRC:" + audios[i].currentSrc);
+    	audios[i].addEventListener('ended', function () {
+    		var nextAudio = this.nextSibling.nextSibling;
+    		if(nextAudio.tagName == "AUDIO"){
+    			nextAudio.play();
+    		}
+    	}, false);
+    }
+ 
+    </script>
+   
+</body>
+</html>

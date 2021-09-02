@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+		<style>
+		.el-icon-more{
+			font-size: 30px;
+		}
+		</style>
+	</head>
+	<body>
+		<!-- div挂载点 -->
+		<div id="app">
+			<ul >
+			<li v-for="(item,index) in arr" :title="item">
+				<!-- title的用法是当鼠标悬停上的时候显示title名称 -->
+			<h3>{{index}}  {{item}}</h3>
+			</li>
+		</ul>
+		<input v-model="addElement" @keyup.enter="add(addElement)"/>
+		<button @click="add(addElement)">添加</button>
+		<input v-model="RemoveIndex" />
+		<button @click="remove(RemoveIndex)">移除</button>
+		<p v-show="arr.length>0">{{arr.length}}</p>
+		<br>
+		<a href="modify.html"><i class="el-icon-more"></i></a>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script>
+		//Vue
+		var app=new Vue({
+			el:"#app",
+			data:
+			{
+				arr:["吃饭","睡觉","写代码"],
+				addElement:0,
+				RemoveIndex:0,
+				
+			},
+			
+			methods:{
+				add:function(addElemnt){
+					this.arr.push(addElemnt);
+				},
+				
+				remove:function(RemoveIndex){
+					this.arr.splice(RemoveIndex,1);
+				}
+			}
+		})
+		</script>
+	</body>
+</html>
