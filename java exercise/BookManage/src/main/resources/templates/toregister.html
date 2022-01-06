@@ -1,0 +1,162 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8"/>-->
+<!--    <title>user</title>-->
+<!--    &lt;!&ndash;利用thymeleaf表达式获取css路径,bootstrap给button提供样式&ndash;&gt;-->
+<!--    &lt;!&ndash;    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>&ndash;&gt;-->
+<!--</head>-->
+<!--<body class="container">-->
+<!--<br/>-->
+<!--<h1>注册用户</h1>-->
+<!--<br/><br/>-->
+<!--<div class="with:80%">-->
+<!--    <form class="form-horizontal"   th:action="@{/tosend}"  method="post">-->
+<!--        &lt;!&ndash;        <div class="form-group">&ndash;&gt;-->
+<!--        &lt;!&ndash;            <label for="id" class="col-sm-2 control-label">userName</label>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <div class="col-sm-10">&ndash;&gt;-->
+<!--        &lt;!&ndash;                <input type="text" class="form-control" name="id"  id="id" placeholder="userName"/>&ndash;&gt;-->
+<!--        &lt;!&ndash;            </div>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </div>&ndash;&gt;-->
+<!--        <div class="form-group">-->
+<!--            <label for="email" class="col-sm-2 control-label" >注册的电子邮箱</label>-->
+<!--            <div class="col-sm-10">-->
+<!--                <input type="text" class="form-control" name="email" id="email"  th:value="${eamil}" placeholder="XXX@abc.com"/>-->
+<!--            </div>-->
+<!--            <p th:text="${warning}"></p>-->
+<!--        </div>-->
+
+<!--        <div class="form-group">-->
+<!--            <label for="password" class="col-sm-2 control-label" >注册密码</label>-->
+<!--            <div class="col-sm-10">-->
+<!--                <input type="password" class="form-control" name="password" id="password" th:minlength="4" th:maxlength="16"  th:value="${password}" placeholder="*******"/>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--            <label for="userid" class="col-sm-2 control-label" >注册学号</label>-->
+<!--            <div class="col-sm-10">-->
+<!--                <input type="userid" class="form-control" name="userid" id="userid" th:maxlength="16" th:minlength="10" th:value="${userid}" placeholder="2018XXXXXXXX"/>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <input type="submit" value="Submit" class="btn btn-info" />-->
+<!--    </form>-->
+
+<!--        <div class="form-group">-->
+<!--            <label for="random" class="col-sm-2 control-label">验证码</label>-->
+<!--            <div class="col-sm-10">-->
+<!--                <input type="text" class="form-control" maxlength="5" minlength="5" name="random"  id="random" placeholder="12345"/>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    <a  th:href="@{/verify/(random=${random},mytoken=${token},email=${eamil},userid=${userid},password=${password})}">提交验证码</a>-->
+<!--&lt;!&ndash;        <input type="submit" value="Submit" class="btn btn-info" /></form>&ndash;&gt;-->
+<!--&lt;!&ndash;    </form>&ndash;&gt;-->
+<!--&lt;!&ndash;    <p th:text=""></p>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;            <label for="tips" class="col-sm-2 control-label">书籍描述</label>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="col-sm-10">&ndash;&gt;-->
+<!--&lt;!&ndash;                <input type="text" class="form-control" name="tips"  id="tips" placeholder="书籍描述"/>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="col-sm-offset-2 col-sm-10">&ndash;&gt;-->
+<!--&lt;!&ndash;                <input type="submit" value="Submit" class="btn btn-info" />&ndash;&gt;-->
+<!--&lt;!&ndash;                &nbsp; &nbsp; &nbsp;&ndash;&gt;-->
+<!--&lt;!&ndash;                <input type="reset" value="Reset" class="btn btn-info" />&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;  &ndash;&gt;-->
+<!--&lt;!&ndash;    <p th:text="${zt}"></p>&ndash;&gt;-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--    <meta name="csrf-token" content="jO12VYgzzFz38MBaUXoc60mIPfjRn2idNDYfyUJU">-->
+
+    <title>Laracon Online</title>
+
+    <!-- Fonts -->
+    <!--    <link href="../static/famliy.css" rel="stylesheet">-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/famliy.css}" />
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/app.css}" />
+
+    <style>[wire\:loading] {display: none;}[wire\:offline] {display: none;}[wire\:dirty]:not(textarea):not(input):not(select) {display: none;}</style>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.2.1/dist/alpine.js" defer></script>
+</head>
+<body class="font-sans antialiased">
+<div class="min-h-screen bg-gray-100">
+    <!-- Page Content -->
+    <main>
+        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+            <div>
+                <img th:src="@{/images/logo-hz.png}" alt="" style="width: 200px;">
+            </div>
+
+            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg ">
+                <form  class="form-horizontal"    th:action="@{/tosend}"  method="post" >
+                    <!--                    <input type="hidden" name="_token" value="jO12VYgzzFz38MBaUXoc60mIPfjRn2idNDYfyUJU">-->
+                    <div>
+                        <label class="block font-medium text-sm text-gray-700">
+                            注册邮箱
+                        </label>
+                        <input class="form-input rounded-md shadow-sm block mt-1 w-full" th:value="${eamil}" type="email" name="email" required="required" autofocus="autofocus">
+                    </div>
+
+                    <div class="mt-4">
+                        <label class="block font-medium text-sm text-gray-700">
+                            注册密码
+                        </label>
+                        <input class="form-input rounded-md shadow-sm block mt-1 w-full" th:value="${password}" type="password" name="password" required="required">
+                    </div>
+
+                    <div class="mt-4">
+                        <label class="block font-medium text-sm text-gray-700">
+                            注册学号
+                        </label>
+                        <input class="form-input rounded-md shadow-sm block mt-1 w-full" type="text" th:value="${userid}" name="userid" minlength="10" maxlength="16" required="required">
+                    </div>
+
+<!--                    <div class="block mt-4">-->
+<!--                        <label class="flex items-center">-->
+<!--                            <input type="checkbox" class="form-checkbox">-->
+<!--                            <span class="ml-2 text-sm text-gray-600">Remember me</span>-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                    <a class="underline text-sm text-gray-600 hover:text-gray-900" th:href="@{/toregister}">-->
+<!--                        Register-->
+<!--                    </a>-->
+                    <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray transition ease-in-out duration-150 ml-4">
+                        获取验证码
+                    </button>
+                </form>
+                <form th:action="@{/verify}" method="post">
+                    <input th:value="${token}" name="token" type="hidden">
+                    <input th:value="${eamil}" name="email" type="hidden">
+                    <input th:value="${userid}" name="userid" type="hidden">
+                    <input th:value="${password}" name="password" type="hidden">
+                        <div class="form-group">
+                            <label for="random" class="col-sm-2 control-label">验证码</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" maxlength="5" minlength="5" name="random"  id="random" placeholder="12345"/>
+                            </div>
+                        </div>
+                    <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray transition ease-in-out duration-150 ml-4">
+                        提交验证码
+                    </button>
+<!--                    <a  th:href="@{/verify/(random=${random},mytoken=${token},email=${eamil},userid=${userid},password=${password})}">提交验证码</a>-->
+                </form>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>
+

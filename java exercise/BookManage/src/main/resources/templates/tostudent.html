@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ch" xml:th="http://www.thymeleaf.org">
+<body>
+<h2>管理员界面</h2>
+<table border="1" th:each="book : ${books.iterator()}">
+    <div th:if="${book.userid} != 'root'">
+    <tr>
+        <th>id</th>
+        <th>password</th>
+        <th>email</th>
+    </tr>
+    <td   th:text="${book.userid}"></td>
+    <td  th:text="${book.password}"></td>
+    <td th:text="${book.email}"></td>
+    <td><a th:href="@{/tostudentedit(userid=${book.userid})}">编辑学生信息</a></td></div>
+<!--&lt;!&ndash;    <td><a th:if="${book.number}>0" th:href="@{/tobrrow(id=${book.id})}">借书</a></td>&ndash;&gt;-->
+<!--    <td><a  th:href="@{/toreturn(id=${book.id})}">还书</a></td>-->
+<!--    &lt;!&ndash;    <td><form th:action="@{/delete/(${book.id})}" method="post"><input type="submit" value="delete"></form></td>&ndash;&gt;-->
+<!--    <td><a th:href="@{/delete(id=${book.id})}">删除书籍信息</a></td>-->
+</table>
+<!--<p th:text="${books.get(4).id}"></p>-->
+<!--<p th:text="${books.get(books.size()-1).id}"></p>-->
+<!--<p></p>-->
+<a th:if="${flag} != 1" th:href="@{/tostudent(start=${pages}+3)}">下一页</a>
+
+<a  th:if="${pages}>=3" th:href="@{/tostudent(start=${pages}-3)}">上一页</a>
+</body>
+</html>

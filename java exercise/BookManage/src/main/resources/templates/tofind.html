@@ -1,0 +1,134 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8"/>-->
+<!--    <title>user</title>-->
+<!--    &lt;!&ndash;利用thymeleaf表达式获取css路径,bootstrap给button提供样式&ndash;&gt;-->
+<!--    &lt;!&ndash;    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>&ndash;&gt;-->
+<!--</head>-->
+<!--<body class="container">-->
+<!--<br/>-->
+<!--<h1>搜索书籍</h1>-->
+<!--<br/><br/>-->
+<!--<div class="with:80%">-->
+<!--    <form class="form-horizontal"   th:action="@{/selectlike}"  method="post">-->
+<!--        &lt;!&ndash;        <div class="form-group">&ndash;&gt;-->
+<!--        &lt;!&ndash;            <label for="id" class="col-sm-2 control-label">userName</label>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <div class="col-sm-10">&ndash;&gt;-->
+<!--        &lt;!&ndash;                <input type="text" class="form-control" name="id"  id="id" placeholder="userName"/>&ndash;&gt;-->
+<!--        &lt;!&ndash;            </div>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </div>&ndash;&gt;-->
+<!--        <div class="form-group">-->
+<!--            <label for="name" class="col-sm-2 control-label" >书籍名称</label>-->
+<!--            <div class="col-sm-10">-->
+<!--                <input type="text" class="form-control" name="name" id="name" placeholder="书籍名称"/>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--            <div class="col-sm-offset-2 col-sm-10">-->
+<!--                <input type="submit" value="Submit" class="btn btn-info" />-->
+<!--                &nbsp; &nbsp; &nbsp;-->
+<!--                <input type="reset" value="Reset" class="btn btn-info" />-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </form>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+<!doctype html>
+<html lang="ch" xml:th="http://www.thymeleaf.org" itemscope itemtype="https://schema.org/WebPage">
+<body>
+<html lang="en" itemscope itemtype="https://schema.org/WebPage" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bazel - a fast, scalable, multi-language and extensible build system" - Bazel</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" >
+    <link rel="stylesheet" type="text/css" th:href="@{/css/famliy.css}" />
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+
+    <!--
+      Metadata tags.
+
+      The metadata tag's name attribute is specified in the HTML5 spec for
+      specifying metadata, and the property attribute comes from RDFa, which
+      itself extends HTML5. It's valid to use both name and property in the
+      same metadata element.
+
+      og:<tag> is part of the Open Graph protocol by Facebook, but is also used
+      by other social media sites like LinkedIn.
+    -->
+</head>
+
+<body class="body-home">
+<nav id="common-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <!--              <a href="https://github.com/bazelbuild/bazel">
+                                    <span class="hidden-sm">GitHub</span>
+                                    <span class="nav-icon visible-sm"><i class="fa fa-github"></i></span>
+                                  </a> -->
+                </li>
+            </ul>
+            <form class="navbar-form navbar-right" th:action="@{/find}"  method="post" id="cse-search-box">
+                <div class="form-group">
+                    <input type="search" name="name" id="name" class="form-control input-sm" placeholder="关键词">
+                </div>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a th:href="@{/toshowbrrow(userid=${userid},token=${token})}">显示自己借的所有书籍</a>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+
+
+<table border="1"  th:each="book : ${books.iterator()}">
+    <tr>
+        <th>id</th>
+        <th>书籍名称</th>
+        <th>书籍作者</th>
+        <th>书籍描述</th>
+        <th>数量</th>
+    </tr>
+    <td th:text="${book.id}"></td>
+    <td th:text="${book.name}"></td>
+    <td th:text="${book.authon}"></td>
+    <td th:text="${book.tips}"></td>
+    <td th:text="${book.number}"></td>
+
+
+</table>
+<!--<p th:text="${books.get(4).id}"></p>-->
+<!--<p th:text="${books.get(books.size()-1).id}"></p>-->
+<!--<p></p>-->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+
+<!-- Anchor JS -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+
+</body>
+</html>
